@@ -50,13 +50,37 @@ export class AboutComponent {
 
             }
         );
-        this.db.collection('courses').get().subscribe(
+    }
+
+    onReadCollection() {
+        this.db.collection('courses/0Tny4K7JbR2nc9ZQx0c4/lessons',
+            ref => ref.where('seqNo', '<=', 5).orderBy('seqNo')).get().subscribe(
             snaps => {
-                // console.log(snaps);
-                console.log(snaps.docs.map(snap => snap.data()));
-                // const courses: Course[] = snap.docs
+                snaps.forEach(snap => {
+
+                    console.log(snap.id);
+                    console.log(snap.data());
+
+                });
             }
         );
+    }
+
+    onReadCollectionGroup() {
+
+        // this.db.collectionGroup('lessons',
+        //     ref => ref.where('seqNo', '==', 9))
+        //     .get()
+        //     .subscribe(snaps => {
+        //
+        //         snaps.forEach(snap => {
+        //
+        //             console.log(snap.id);
+        //             console.log(snap.data());
+        //
+        //         });
+        //
+        //     });
 
     }
 }
