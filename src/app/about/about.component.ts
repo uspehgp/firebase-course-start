@@ -21,7 +21,7 @@ export class AboutComponent {
     async uploadData() {
         const coursesCollection = this.db.collection('courses');
         const courses = await this.db.collection('courses').get();
-        for (let course of Object.values(COURSES)) {
+        for (const course of Object.values(COURSES)) {
             const newCourse = this.removeId(course);
             const courseRef = await coursesCollection.add(newCourse);
             const lessons = await courseRef.collection('lessons');
@@ -40,47 +40,52 @@ export class AboutComponent {
         delete newData.id;
         return newData;
     }
-
-
     onReadDoc() {
-        this.db.doc('/courses/0Tny4K7JbR2nc9ZQx0c4').get().subscribe(
-            snap => {
-                // console.log(snap.id);
-                console.log(snap.data());
 
-            }
-        );
+        this.db.doc('/courses/0Tny4K7JbR2nc9ZQx0c4').get().subscribe(
+            course => {
+
+                console.log(course.id);
+                console.log(course.data());
+
+            });
     }
 
     onReadCollection() {
-        this.db.collection('courses/0Tny4K7JbR2nc9ZQx0c4/lessons',
-            ref => ref.where('seqNo', '<=', 5).orderBy('seqNo')).get().subscribe(
-            snaps => {
+        this.db.collection(
+            'courses',
+            ref => ref.where('seqNo', '<=', 20)
+                .where('url', '==', 'angular-forms-course')
+                .orderBy('seqNo')
+        ).get()
+            .subscribe(snaps => {
+
                 snaps.forEach(snap => {
 
                     console.log(snap.id);
                     console.log(snap.data());
 
                 });
-            }
-        );
+
+            });
+
     }
 
     onReadCollectionGroup() {
 
-        // this.db.collectionGroup('lessons',
-        //     ref => ref.where('seqNo', '==', 9))
-        //     .get()
-        //     .subscribe(snaps => {
-        //
-        //         snaps.forEach(snap => {
-        //
-        //             console.log(snap.id);
-        //             console.log(snap.data());
-        //
-        //         });
-        //
-        //     });
+        this.db.collectionGroup('lessons',
+            ref => ref.where('seqNo', '==', 1))
+            .get()
+            .subscribe(snaps => {
+
+                snaps.forEach(snap => {
+
+                    console.log(snap.id);
+                    console.log(snap.data());
+
+                });
+
+            });
 
     }
 }
