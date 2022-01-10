@@ -42,11 +42,11 @@ export class AboutComponent {
     }
     onReadDoc() {
 
-        this.db.doc('/courses/0Tny4K7JbR2nc9ZQx0c4').get().subscribe(
+        this.db.doc('/courses/0Tny4K7JbR2nc9ZQx0c4').snapshotChanges().subscribe(
             course => {
 
-                console.log(course.id);
-                console.log(course.data());
+                console.log(course.payload.id);
+                console.log(course.payload.data());
 
             });
     }
