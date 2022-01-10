@@ -6,6 +6,7 @@ import 'firebase/firestore';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {COURSES, findLessonsForCourse} from './db-data';
 import {Course} from '../model/course';
+import {take} from 'rxjs/operators';
 
 
 @Component({
@@ -42,7 +43,11 @@ export class AboutComponent {
     }
     onReadDoc() {
 
-        this.db.doc('/courses/0Tny4K7JbR2nc9ZQx0c4').valueChanges().subscribe(
+        this.db.doc('/courses/0Tny4K7JbR2nc9ZQx0c4').valueChanges()
+            .pipe(
+                take(1)
+            )
+            .subscribe(
             course => {
 
                 console.log(course);
