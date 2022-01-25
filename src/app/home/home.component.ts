@@ -28,6 +28,6 @@ export class HomeComponent implements OnInit {
 
     reloadCourser() {
         this.beginnersCourses$ = this.coursesService.loadCoursesByCategory('BEGINNER');
-        this.advancedCourses$ = this.coursesService.loadCoursesByCategory('ADVANCE');
+        this.advancedCourses$ = this.coursesService.loadCoursesByCategory('ADVANCED');
     }
 }
