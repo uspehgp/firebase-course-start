@@ -2,6 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Course} from '../model/course';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {CoursesService} from '../services/courses.service';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class EditCourseDialogComponent {
     constructor(
         private dialogRef: MatDialogRef<EditCourseDialogComponent>,
         private fb: FormBuilder,
-        @Inject(MAT_DIALOG_DATA) course: Course
+        @Inject(MAT_DIALOG_DATA) course: Course,
+        private coursesService: CoursesService
     ) {
         this.course = course;
 
@@ -34,6 +36,13 @@ export class EditCourseDialogComponent {
     }
 
     save() {
+        const changes = this.form.value;
+        this.coursesService.updateCourse(this.course.id, changes)
+            .subscribe(
+                () => {
+                    this.dialogRef.close(changes);
+                }
+            );
 
     }
 }

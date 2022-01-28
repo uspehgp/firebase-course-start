@@ -23,10 +23,10 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.reloadCourser();
+        this.reloadCourses();
     }
 
-    reloadCourser() {
+    reloadCourses() {
         this.beginnersCourses$ = this.coursesService.loadCoursesByCategory('BEGINNER');
         this.advancedCourses$ = this.coursesService.loadCoursesByCategory('ADVANCED');
     }
