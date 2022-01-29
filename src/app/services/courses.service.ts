@@ -18,6 +18,10 @@ export class CoursesService {
         return from(this.db.doc(`courses/${courseId}`).update(changes));
     }
 
+    findCourseByUrl(courseUrl: string) {
+        return undefined;
+    }
+
     deleteCourseAndLessons(courseId: string) {
         return this.db.collection(`courses/${courseId}/lessons`)
             .get()
@@ -101,4 +105,5 @@ export class CoursesService {
                 map(result => convertSnaps<Course>(result))
             );
     }
+
 }
