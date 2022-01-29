@@ -17,6 +17,10 @@ export class CoursesService {
         return from(this.db.doc(`courses/${courseId}`).update(changes));
     }
 
+    deleteCourse(courseId: string) {
+        return from(this.db.doc(`courses/${courseId}`).delete());
+    }
+
     createCourse(newCourse: Partial<Course>, courseId?: string) {
         return this.db.collection('courses',
             ref => ref.orderBy('seqNo', 'desc').limit(1))
