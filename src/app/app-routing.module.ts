@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import {AboutComponent} from './about/about.component';
 import {CourseComponent} from './course/course.component';
 import {LoginComponent} from './login/login.component';
 import {CreateCourseComponent} from './create-course/create-course.component';
-import {AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo} from '@angular/fire/auth-guard';
 import {CreateUserComponent} from './create-user/create-user.component';
+import {CourseResolver} from './services/course.resolver';
 
 const routes: Routes = [
   {
@@ -33,7 +33,8 @@ const routes: Routes = [
   },
   {
     path: 'courses/:courseUrl',
-    component: CourseComponent
+    component: CourseComponent,
+    resolve: {course: CourseResolver}
   },
   {
     path: '**',

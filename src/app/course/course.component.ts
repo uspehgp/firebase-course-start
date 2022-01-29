@@ -1,28 +1,28 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Course} from '../model/course';
-import {finalize, tap} from 'rxjs/operators';
-import {Observable} from 'rxjs';
-import {Lesson} from '../model/lesson';
 
 
 @Component({
-  selector: 'course',
-  templateUrl: './course.component.html',
-  styleUrls: ['./course.component.css']
+    selector: 'course',
+    templateUrl: './course.component.html',
+    styleUrls: ['./course.component.css']
 })
 export class CourseComponent implements OnInit {
 
-  loading = false;
+    course: Course;
 
-  displayedColumns = ['seqNo', 'description', 'duration'];
+    loading = false;
 
-  constructor(private route: ActivatedRoute) {
+    displayedColumns = ['seqNo', 'description', 'duration'];
 
-  }
+    constructor(private route: ActivatedRoute) {
 
-  ngOnInit() {
+    }
 
-  }
+    ngOnInit() {
+
+        this.course = this.route.snapshot.data['course'];
+    }
 
 }
